@@ -1,5 +1,5 @@
 <template>
   <main>
-    Games
+    Game View
   </main>
 </template>
