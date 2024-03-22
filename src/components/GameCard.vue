@@ -1,3 +1,12 @@
+<script setup>
+const { game } = defineProps(['game'])
+</script>
+
 <template>
-    Game Card
+  <div>
+    <RouterLink :to="`/game/${game?.id}`"><img :src="game?.thumbnail" /></RouterLink>
+    <div>Title: {{ game?.title }}</div>
+    <div>Genre: {{ game?.genre }}</div>
+    <div>Platform: {{ game?.platform }}</div>
+  </div>
 </template>
