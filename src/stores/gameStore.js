@@ -19,9 +19,7 @@ const state = reactive({
   error: null,
   page: 1,
   search: '',
-  filters: [],
-  platformFilters: [],
-  genreFilters: []
+  filters: []
 })
 
 const platforms = computed(() => {
@@ -91,23 +89,29 @@ const runFilter = () => {
   state.games = data.value.filter((game) => {
     const likeSearch = game.title.toLowerCase().includes(state.search.toLowerCase())
     let isMatchingGenre = null
+    let isMatchingPlatform = null
 
-    const hasFilter = state.filters.some((filter) => {
+    state.filters.forEach((filter) => {
       const values = game[filter.field].trim().split(', ')
 
       const isMatch = values.includes(filter.value)
 
-      if (filter.field === 'genre') {
+      if (filter.field === 'genre' && !isMatchingGenre) {
         isMatchingGenre = isMatch
       }
 
-      return isMatch
+      if (filter.field === 'platform' && !isMatchingPlatform) {
+        isMatchingPlatform = isMatch
+      }
     })
+
+    const hasFilters = state.filters.length > 0
 
     return (
       likeSearch &&
-      (hasFilter || state.filters.length === 0) &&
-      (isMatchingGenre || isMatchingGenre === null)
+      (((isMatchingPlatform || isMatchingPlatform === null) &&
+        (isMatchingGenre || isMatchingGenre === null)) ||
+        !hasFilters)
     )
   })
 
