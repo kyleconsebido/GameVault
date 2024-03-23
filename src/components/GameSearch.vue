@@ -9,7 +9,7 @@ const { state, runFilter } = useGames()
 
 const handleSubmit = () => {
   if (route.name !== 'Games') {
-    router.push('/')
+    router.push('/games')
   }
 
   runFilter()

@@ -5,7 +5,8 @@ import useGames from '../stores/gameStore'
 
 <template>
   <nav>
-    <RouterLink to="/" @click="useGames().initialize()">Home</RouterLink>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/games" @click="useGames().initialize()">Games</RouterLink>
     <GameSearch />
   </nav>
 </template>
