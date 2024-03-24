@@ -1,26 +1,26 @@
 <script setup>
-import useGames from '../stores/gameStore'
+import useGames from '@/stores/useGames/'
 
-const { state, platforms, genres, setFilters } = useGames()
+const { filters, platforms, genres } = useGames()
 
 function toggleFilter(e) {
   const { checked, value, dataset } = e.currentTarget
 
-  const filters = [...state.filters]
+  const updatedFilters = [...filters.value]
 
   if (checked) {
-    filters.push({ field: dataset.field, value })
+    updatedFilters.push({ field: dataset.field, value })
   } else {
-    const index = filters.findIndex(
+    const index = updatedFilters.findIndex(
       (filter) => filter.field === dataset.field && filter.value === value
     )
 
     if (index !== -1) {
-      filters.splice(index, 1)
+      updatedFilters.splice(index, 1)
     }
   }
 
-  setFilters(...filters)
+  filters.value = updatedFilters
 }
 </script>
 <template>

@@ -1,19 +1,21 @@
 <script setup>
 import { computed } from 'vue'
-import useGames from '@/stores/gameStore'
+import useGames from '@/stores/useGames/'
 
-const { state, pages, setPage, incrementPage, decrementPage } = useGames()
+const { page: currentPage, pages, incrementPage, decrementPage } = useGames()
 
 const sliceLength = 5
 
 const pageSlice = computed(() => {
-  const position = (state.page % sliceLength) - 1
+  const position = (currentPage.value % sliceLength) - 1
 
-  const fill = (_, i) => state.page - (position - i) - (position === -1 ? sliceLength : 0)
+  const fill = (_, i) => currentPage.value - (position - i) - (position === -1 ? sliceLength : 0)
   const slice = Array.from({ length: sliceLength }, fill)
 
   const maxValue =
-    state.page + sliceLength - (position === -1 ? sliceLength : state.page % sliceLength)
+    currentPage.value +
+    sliceLength -
+    (position === -1 ? sliceLength : currentPage.value % sliceLength)
 
   if (pages.value < maxValue) {
     return slice.slice(0, pages.value - maxValue)
@@ -24,18 +26,18 @@ const pageSlice = computed(() => {
 </script>
 <template>
   <section v-if="pages > 0">
-    <button :disabled="state.page == 1" @click="setPage(1)">1</button>
-    <button :disabled="state.page <= 1" @click="decrementPage">prev</button>
+    <button :disabled="currentPage == 1" @click="currentPage = 1">1</button>
+    <button :disabled="currentPage <= 1" @click="decrementPage">prev</button>
     <button
       v-for="page of pageSlice"
       :key="page"
-      :disabled="state.page === page"
-      @click="setPage(page)"
+      :disabled="currentPage === page"
+      @click="currentPage = page"
     >
       {{ page }}
     </button>
-    <button :disabled="state.page >= pages" @click="incrementPage">next</button>
-    <button :disabled="state.page === pages" @click="setPage(pages)">
+    <button :disabled="currentPage >= pages" @click="incrementPage">next</button>
+    <button :disabled="currentPage === pages" @click="currentPage = pages">
       {{ pages }}
     </button>
   </section>

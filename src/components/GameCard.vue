@@ -4,7 +4,7 @@ const { game } = defineProps(['game'])
 
 <template>
   <div>
-    <RouterLink :to="`/game/${game?.id}`"><img :src="game?.thumbnail" /></RouterLink>
+    <RouterLink :to="`/games/${game?.id}`"><img :src="game?.thumbnail" /></RouterLink>
     <div>Title: {{ game?.title }}</div>
     <div>Genre: {{ game?.genre }}</div>
     <div>Platform: {{ game?.platform }}</div>

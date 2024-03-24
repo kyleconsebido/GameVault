@@ -17,7 +17,7 @@ const router = createRouter({
       component: GamesView
     },
     {
-      path: '/game/:id',
+      path: '/games/:id',
       name: 'Game',
       component: GameView
     }
