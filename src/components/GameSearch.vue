@@ -1,24 +1,33 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import useGames from '../stores/gameStore'
+import useGames from '@/stores/useGames/'
 
 const route = useRoute()
 const router = useRouter()
 
-const { state, runFilter } = useGames()
+const { search } = useGames()
 
-const handleSubmit = () => {
-  if (route.name !== 'Games') {
+let isSearching = false
+
+router.beforeEach(() => {
+  if (!isSearching) {
+    search.value = ''
+  }
+})
+
+router.afterEach(() => (isSearching = false))
+
+const searchGame = () => {
+  if (route.path !== '/games' && search.value) {
+    isSearching = true
     router.push('/games')
   }
-
-  runFilter()
 }
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit">
-    <input v-model.trim="state.search" />
+  <form @submit.prevent="searchGame">
+    <input v-model.trim="search" />
     <button>Search</button>
   </form>
 </template>

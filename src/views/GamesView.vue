@@ -1,10 +1,12 @@
 <script setup>
-import useGames from '@/stores/gameStore'
+import useGames from '@/stores/useGames/'
 import GameCard from '@/components/GameCard.vue'
 import GamePagination from '@/components/GamePagination.vue'
 import GameFilters from '@/components/GameFilters.vue'
 
-const { gameSlice } = useGames()
+const { gameSlice, initialize } = useGames()
+
+initialize({ clearSearch: false })
 </script>
 <template>
   <main>
