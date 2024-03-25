@@ -31,7 +31,7 @@ const games = computed(() => {
     let isMatchingGenre = null
     let isMatchingPlatform = null
 
-    state.filters.forEach((filter) => {
+    filters.value.forEach((filter) => {
       const values = game[filter.field].trim().split(', ')
 
       const isMatch = values.includes(filter.value)
@@ -45,7 +45,7 @@ const games = computed(() => {
       }
     })
 
-    const hasFilters = state.filters.length > 0
+    const hasFilters = filters.value.length > 0
 
     return (
       likeSearch &&
@@ -114,7 +114,7 @@ const initialize = (
       }
 
       if (clearFilters) {
-        state.filters = []
+        filters.value = []
       }
     })
     .catch((error) => {
