@@ -44,6 +44,14 @@ const clickBack = () => {
       <div>Publisher: {{ game?.publisher }}</div>
       <div>Developer: {{ game?.developer }}</div>
       <div>Release Date: {{ game?.release_date }}</div>
+      <div>
+        Minimum System Requirements
+        <div>OS: {{ game?.minimum_system_requirements?.os }}</div>
+        <div>Processor: {{ game?.minimum_system_requirements?.processor }}</div>
+        <div>Memory: {{ game?.minimum_system_requirements?.memory }}</div>
+        <div>Graphics: {{ game?.minimum_system_requirements?.graphics }}</div>
+        <div>Storage {{ game?.minimum_system_requirements?.storage }}</div>
+      </div>
     </div>
   </main>
 </template>
