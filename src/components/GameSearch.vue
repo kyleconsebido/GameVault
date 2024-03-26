@@ -1,4 +1,5 @@
 <script setup>
+import { IconSearch } from '@/assets/icons'
 import { useRoute, useRouter } from 'vue-router'
 import useGames from '@/stores/useGames/'
 
@@ -27,7 +28,55 @@ const searchGame = () => {
 
 <template>
   <form @submit.prevent="searchGame">
-    <input v-model.trim="search" />
-    <button>Search</button>
+    <input v-model.trim="search" placeholder="Search" />
+    <button :disabled="!search"><IconSearch /></button>
   </form>
 </template>
+
+<style scoped>
+form {
+  position: relative;
+  height: 2rem;
+}
+
+input {
+  background-color: var(--color-input);
+  color: var(--color-text-dark);
+  border: none;
+  outline: none;
+  height: 100%;
+  padding-left: 1em;
+  padding-right: 3em;
+  border-radius: var(--border-radius);
+  transition: 100ms box-shadow;
+}
+
+input:focus {
+  box-shadow: inset 0 0 0 1px var(--black-4);
+}
+
+input::placeholder {
+  color: var(--black-4);
+}
+
+button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  padding-right: 1em;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black-4);
+  transition: 100ms color;
+}
+
+input:focus ~ button:enabled,
+button:enabled:focus {
+  color: var(--color-text-dark);
+  cursor: pointer;
+}
+</style>
