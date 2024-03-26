@@ -1,15 +1,15 @@
 :root {
-  --yellow: #ffd700;
-  --red: #e11c1c;
+  --yellow: rgb(255, 215, 0);
+  --red: rgb(225, 28, 28);
 
-  --black-1: #000000;
-  --black-2: #181818;
-  --black-3: #272a2d;
-  --black-4: #40464b;
+  --black-1: rgb(0, 0, 0);
+  --black-2: rgb(24, 24, 24);
+  --black-3: rgb(39, 42, 45);
+  --black-4: rgb(64, 70, 75);
 
-  --gray: #9e9e9e;
+  --gray: rgb(158, 158, 158);
 
-  --white: #ffffff;
+  --white: rgb(255, 255, 255);
 }
 
 :root {
