@@ -25,7 +25,8 @@
 
   --color-input: var(--black-3);
 
-  --color-border: var(--black-4);
+  --color-border-light: var(--black-4);
+  --color-border-dark: var(--black-3);
 
   --border-radius: 6px;
   --border-radius-lg: calc(var(--border-radius) * 4);
