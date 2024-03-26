@@ -23,6 +23,7 @@ import GameSearch from './GameSearch.vue'
 nav {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  z-index: 100;
 }
 
 ul {
