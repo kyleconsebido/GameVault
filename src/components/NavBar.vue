@@ -73,6 +73,10 @@ a {
 
 .title {
   color: var(--color-heading);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .search {

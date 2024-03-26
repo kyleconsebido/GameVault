@@ -49,6 +49,10 @@ input {
   padding-right: 3em;
   border-radius: var(--border-radius);
   transition: 100ms box-shadow;
+
+  @media (max-width: 480px) {
+    width: 150px;
+  }
 }
 
 input:focus {

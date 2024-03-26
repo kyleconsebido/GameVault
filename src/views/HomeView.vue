@@ -55,7 +55,7 @@
 .hero {
   position: relative;
   z-index: 1;
-  width: max(300px, 50%);
+  width: clamp(300px, 80%, 600px);
 }
 
 .hero-title {
