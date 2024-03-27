@@ -19,7 +19,7 @@ h1.section-title {
 }
 
 .section-title {
-  font-family: 'Lexend Mega';
+  font-family: 'Lexend Mega', 'DM Sans', Inter, sans-serif;
   font-size: 4rem;
   text-transform: uppercase;
 }
