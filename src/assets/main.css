@@ -23,3 +23,8 @@ h1.section-title {
   font-size: 4rem;
   text-transform: uppercase;
 }
+
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--black-3) var(--color-background);
+}

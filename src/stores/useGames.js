@@ -10,13 +10,12 @@ const options = {
   cache: 'force-cache'
 }
 
-const limit = 20
+const limit = 15
 
 const state = reactive({
   data: [],
   loading: false,
   error: null,
-  page: 1,
   search: '',
   filters: []
 })
@@ -46,6 +45,8 @@ const games = computed(() => {
     })
 
     const hasFilters = filters.value.length > 0
+
+    page.value = 1
 
     return (
       likeSearch &&
