@@ -67,11 +67,39 @@
   letter-spacing: 0.1em;
   text-decoration: none;
   text-align: center;
-  color: var(--black-1);
-  background: var(--color-theme-gradient-x);
   margin-top: 2rem;
   width: max(150px, 40%);
   padding: 0.5em 1em;
   border-radius: var(--border-radius-lg);
+  color: var(--black-1);
+  background: var(--color-theme-gradient-x);
+
+  --angle: 0.25turn;
+  --end-color: var(--red);
+
+  background: linear-gradient(var(--angle), var(--yellow), var(--end-color));
+  transform-origin: left;
+  transition:
+    --angle 500ms,
+    --end-color 1s,
+    scale 200ms;
+}
+
+.hero-action:hover {
+  scale: 1.05;
+  --angle: 0.5turn;
+  --end-color: var(--yellow);
+}
+
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0.25turn;
+}
+
+@property --end-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: red;
 }
 </style>
