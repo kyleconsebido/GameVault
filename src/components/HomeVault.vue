@@ -73,7 +73,7 @@ const redirectToPlatform = (platform) => {
 }
 
 .platform-btn {
-  --color: var(--color-background);
+  --color-background: var(--color-background);
 
   position: relative;
   font-size: 1rem;
@@ -87,7 +87,6 @@ const redirectToPlatform = (platform) => {
   color: var(--color-text-light);
   outline: none;
   cursor: pointer;
-  color: black;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   backface-visibility: none;
@@ -105,7 +104,7 @@ const redirectToPlatform = (platform) => {
   border-radius: inherit;
   background: radial-gradient(
       circle at top right,
-      color-mix(in srgb, var(--color) 100%, transparent) -50%,
+      color-mix(in srgb, var(--color-background) 100%, transparent) -50%,
       transparent 100%
     )
     color-mix(in srgb, var(--black-1) 50%, transparent);
@@ -115,11 +114,11 @@ const redirectToPlatform = (platform) => {
 }
 
 .platform-btn.windows {
-  --color: #087cd5;
+  --color-background: #087cd5;
 }
 
 .platform-btn.browser {
-  --color: var(--red);
+  --color-background: var(--red);
 }
 
 .platform-btn:hover {
