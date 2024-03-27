@@ -5,7 +5,7 @@ import useGame from '../stores/useGame'
 const route = useRoute()
 const router = useRouter()
 
-const { data: game, loading, error } = useGame(route.params.id)
+const state = useGame(route.params.id)
 
 const clickBack = () => {
   const isValidRoute = router.options.routes.some(
@@ -23,34 +23,34 @@ const clickBack = () => {
 <template>
   <main>
     <button @click="clickBack">Back</button>
-    <div v-if="loading">Loading</div>
-    <div v-else-if="error">{{ error }}</div>
+    <div v-if="state.loading">Loading</div>
+    <div v-else-if="state.error">{{ state.error }}</div>
     <div v-else>
-      <div><img :src="game?.thumbnail" /></div>
+      <div><img :src="state?.data?.thumbnail" /></div>
       <div>
         <img
-          v-for="screenshot of game?.screenshots"
+          v-for="screenshot of state?.data?.screenshots"
           :key="screenshot.id"
           :src="screenshot.image"
           width="300"
         />
       </div>
-      <div>Title: {{ game?.title }}</div>
-      <div>Short Desc: {{ game?.short_description }}</div>
-      <div>Desc: {{ game?.description }}</div>
-      <a :href="game.game_url" target="_blank">URL: {{ game?.game_url }}</a>
-      <div>Genre: {{ game?.genre }}</div>
-      <div>Platform: {{ game?.platform }}</div>
-      <div>Publisher: {{ game?.publisher }}</div>
-      <div>Developer: {{ game?.developer }}</div>
-      <div>Release Date: {{ game?.release_date }}</div>
+      <div>Title: {{ state?.data?.title }}</div>
+      <div>Short Desc: {{ state?.data?.short_description }}</div>
+      <div>Desc: {{ state?.data?.description }}</div>
+      <a :href="state?.data?.game_url" target="_blank">URL: {{ state?.data?.game_url }}</a>
+      <div>Genre: {{ state?.data?.genre }}</div>
+      <div>Platform: {{ state?.data?.platform }}</div>
+      <div>Publisher: {{ state?.data?.publisher }}</div>
+      <div>Developer: {{ state?.data?.developer }}</div>
+      <div>Release Date: {{ state?.data?.release_date }}</div>
       <div>
         Minimum System Requirements
-        <div>OS: {{ game?.minimum_system_requirements?.os }}</div>
-        <div>Processor: {{ game?.minimum_system_requirements?.processor }}</div>
-        <div>Memory: {{ game?.minimum_system_requirements?.memory }}</div>
-        <div>Graphics: {{ game?.minimum_system_requirements?.graphics }}</div>
-        <div>Storage {{ game?.minimum_system_requirements?.storage }}</div>
+        <div>OS: {{ state?.data?.minimum_system_requirements?.os }}</div>
+        <div>Processor: {{ state?.data?.minimum_system_requirements?.processor }}</div>
+        <div>Memory: {{ state?.data?.minimum_system_requirements?.memory }}</div>
+        <div>Graphics: {{ state?.data?.minimum_system_requirements?.graphics }}</div>
+        <div>Storage {{ state?.data?.minimum_system_requirements?.storage }}</div>
       </div>
     </div>
   </main>

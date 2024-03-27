@@ -19,7 +19,7 @@
 <style scoped>
 footer {
   margin-top: auto;
-  padding-top: 4rem;
+  padding-top: 150px;
   padding-bottom: 2rem;
   color: var(--color-text-dark);
 }

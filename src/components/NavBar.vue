@@ -1,18 +1,42 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import GameSearch from './GameSearch.vue'
+import useGames from '../stores/useGames'
+import useNavBar from '../stores/useNavBar'
+
+const route = useRoute()
+
+const isVisibleLinks = useNavBar()
+
+const scrollTop = (path) => {
+  const scrollOptions = { top: 0, behavior: 'instant' }
+
+  if (route.path === path) {
+    scrollOptions.behavior = 'smooth'
+  }
+
+  window.scrollTo(scrollOptions)
+}
+
+const initializeGames = () => {
+  useGames().initialize()
+  scrollTop('/games')
+}
 </script>
 
 <template>
-  <nav>
+  <nav :class="{ hide: !isVisibleLinks }">
     <div class="app-container">
       <ul class="nav-items">
         <li>
-          <RouterLink to="/" class="home">
+          <RouterLink to="/" class="home" @click="scrollTop('/')">
             <img class="logo" src="../assets/logo.svg" />
             <span class="title">GAME VAULT</span>
           </RouterLink>
         </li>
-        <li class="nav-item"><RouterLink to="/games" class="nav-item">Games</RouterLink></li>
+        <li class="nav-item">
+          <RouterLink to="/games" class="nav-item" @click="initializeGames">Games</RouterLink>
+        </li>
         <li class="nav-item search"><GameSearch /></li>
       </ul>
     </div>
@@ -21,8 +45,22 @@ import GameSearch from './GameSearch.vue'
 
 <style scoped>
 nav {
+  position: sticky;
+  top: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  z-index: 100;
+  background-color: color-mix(in srgb, var(--black-2) 95%, transparent);
+  backdrop-filter: blur(3px);
+  transition:
+    200ms background-color,
+    200ms backdrop-filter;
+}
+
+nav.hide {
+  backdrop-filter: none;
+  background-color: transparent;
+  pointer-events: none;
 }
 
 ul {
@@ -35,7 +73,15 @@ li {
 }
 
 a {
+  --opacity-ms: 500ms;
   text-decoration: none;
+  opacity: 1;
+  transition: var(--opacity-ms) opacity;
+}
+
+.hide a {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav-items {
@@ -48,7 +94,9 @@ a {
   letter-spacing: 0.1em;
   translate: 0 0.1em;
   color: var(--color-text-dark);
-  transition: 100ms color;
+  transition:
+    100ms color,
+    var(--opacity-ms) opacity;
 }
 
 .nav-item a:hover {
@@ -72,6 +120,10 @@ a {
 
 .title {
   color: var(--color-heading);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .search {

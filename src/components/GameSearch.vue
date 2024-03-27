@@ -1,6 +1,7 @@
 <script setup>
-import { IconSearch } from '@/assets/icons'
+import { watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { IconSearch } from '@/assets/icons'
 import useGames from '@/stores/useGames/'
 
 const route = useRoute()
@@ -8,22 +9,18 @@ const router = useRouter()
 
 const { search } = useGames()
 
-let isSearching = false
+const searchGame = () => {
+  if (route.path !== '/games' && search.value) {
+    router.push('/games')
+    window.scrollTo(0, 0)
+  }
+}
 
-router.beforeEach(() => {
-  if (!isSearching) {
+watch(route, () => {
+  if (route.path !== '/games') {
     search.value = ''
   }
 })
-
-router.afterEach(() => (isSearching = false))
-
-const searchGame = () => {
-  if (route.path !== '/games' && search.value) {
-    isSearching = true
-    router.push('/games')
-  }
-}
 </script>
 
 <template>
@@ -35,6 +32,7 @@ const searchGame = () => {
 
 <style scoped>
 form {
+  pointer-events: all;
   position: relative;
   height: 2rem;
 }
@@ -49,6 +47,10 @@ input {
   padding-right: 3em;
   border-radius: var(--border-radius);
   transition: 100ms box-shadow;
+
+  @media (max-width: 480px) {
+    width: 150px;
+  }
 }
 
 input:focus {
