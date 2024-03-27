@@ -13,6 +13,7 @@ const options = {
 const limit = 20
 
 const state = reactive({
+  data: [],
   loading: false,
   error: null,
   page: 1,
@@ -20,13 +21,12 @@ const state = reactive({
   filters: []
 })
 
-const data = ref([])
 const search = ref('')
 const page = ref(1)
 const filters = ref([])
 
 const games = computed(() => {
-  return data.value.filter((game) => {
+  return state.data.filter((game) => {
     const likeSearch = game.title.toLowerCase().includes(search.value.toLowerCase())
     let isMatchingGenre = null
     let isMatchingPlatform = null
@@ -58,7 +58,7 @@ const games = computed(() => {
 
 const platforms = computed(() => {
   return Array.from(
-    data.value.reduce((acc, game) => {
+    state.data.reduce((acc, game) => {
       const plats = game.platform.split(', ')
 
       plats.forEach((platform) => {
@@ -72,7 +72,7 @@ const platforms = computed(() => {
 
 const genres = computed(() => {
   return Array.from(
-    data.value.reduce((acc, game) => {
+    state.data.reduce((acc, game) => {
       acc.add(game.genre.trim())
 
       return acc
@@ -103,19 +103,19 @@ const initialize = (
   state.error = null
   state.loading = true
 
+  if (clearSearch) {
+    search.value = ''
+  }
+
+  if (clearFilters) {
+    filters.value = []
+  }
+
   fetch(url, options)
     .then((res) => res.json())
     .then((dat) => {
-      data.value = dat
+      state.data = dat
       page.value = 1
-
-      if (clearSearch) {
-        search.value = ''
-      }
-
-      if (clearFilters) {
-        filters.value = []
-      }
     })
     .catch((error) => {
       console.error(error)

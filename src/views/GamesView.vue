@@ -4,9 +4,7 @@ import GameCard from '@/components/GameCard.vue'
 import GamePagination from '@/components/GamePagination.vue'
 import GameFilters from '@/components/GameFilters.vue'
 
-const { gameSlice, initialize } = useGames()
-
-initialize({ clearSearch: false })
+const { gameSlice } = useGames()
 </script>
 <template>
   <main>

@@ -1,6 +1,7 @@
 <script setup>
-import { IconSearch } from '@/assets/icons'
+import { watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { IconSearch } from '@/assets/icons'
 import useGames from '@/stores/useGames/'
 
 const route = useRoute()
@@ -8,22 +9,17 @@ const router = useRouter()
 
 const { search } = useGames()
 
-let isSearching = false
-
-router.beforeEach(() => {
-  if (!isSearching) {
-    search.value = ''
-  }
-})
-
-router.afterEach(() => (isSearching = false))
-
 const searchGame = () => {
   if (route.path !== '/games' && search.value) {
-    isSearching = true
     router.push('/games')
   }
 }
+
+watch(route, () => {
+  if (route.path !== '/games') {
+    search.value = ''
+  }
+})
 </script>
 
 <template>

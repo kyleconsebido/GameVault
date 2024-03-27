@@ -1,5 +1,6 @@
 <script setup>
 import GameSearch from './GameSearch.vue'
+import useGames from '@/stores/useGames'
 </script>
 
 <template>
@@ -12,7 +13,11 @@ import GameSearch from './GameSearch.vue'
             <span class="title">GAME VAULT</span>
           </RouterLink>
         </li>
-        <li class="nav-item"><RouterLink to="/games" class="nav-item">Games</RouterLink></li>
+        <li class="nav-item">
+          <RouterLink to="/games" class="nav-item" @click="useGames().initialize()">
+            Games
+          </RouterLink>
+        </li>
         <li class="nav-item search"><GameSearch /></li>
       </ul>
     </div>
