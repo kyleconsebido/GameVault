@@ -12,6 +12,7 @@ const { search } = useGames()
 const searchGame = () => {
   if (route.path !== '/games' && search.value) {
     router.push('/games')
+    window.scrollTo(0, 0)
   }
 }
 
@@ -31,6 +32,7 @@ watch(route, () => {
 
 <style scoped>
 form {
+  pointer-events: all;
   position: relative;
   height: 2rem;
 }

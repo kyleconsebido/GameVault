@@ -1,14 +1,43 @@
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import useNavBar from '../stores/useNavBar'
+import useGames from '../stores/useGames'
+
+const element = ref(null)
+
+const isVisibleLinks = useNavBar()
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    isVisibleLinks.value = !entry.isIntersecting
+  })
+})
+
+onMounted(() => {
+  observer.observe(element.value)
+})
+
+onUnmounted(() => {
+  isVisibleLinks.value = true
+  observer.disconnect()
+})
+
+const initializeGames = () => {
+  useGames().initialize()
+  window.scrollTo(0, 0)
+}
+</script>
 <template>
   <section class="hero-container">
     <img src="@/assets/images/hero-background.jpg" role="presentation" />
     <div class="app-container">
-      <div class="hero">
+      <div :ref="(el) => (element = el)" class="hero">
         <h1 class="section-title">GAME VAULT</h1>
         <div class="hero-text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit aliquam suscipit ab sint
           perferendis quisquam odit eligendi dolorem laboriosam!
         </div>
-        <RouterLink class="hero-action" to="/games">PLAY NOW</RouterLink>
+        <RouterLink class="hero-action" to="/games" @click="initializeGames">PLAY NOW</RouterLink>
       </div>
     </div>
   </section>
