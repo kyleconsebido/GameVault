@@ -6,9 +6,11 @@ import { IconBrowser, IconWindows } from '../assets/icons'
   <section class="app-container vault">
     <img src="@/assets/images/vault-clipart.svg" />
     <div class="vault-info">
-      <span class="section-title">
-        <span class="vault-number">300+</span>
-        <br />Games
+      <span>
+        <h1 class="section-title">
+          <span class="vault-number">300+</span>
+          <br />Games
+        </h1>
         <div class="platforms">
           <button class="platform-btn windows">
             <IconWindows class="platform-icon" />
@@ -31,7 +33,7 @@ import { IconBrowser, IconWindows } from '../assets/icons'
 }
 
 .vault img {
-  width: 90%;
+  width: 100%;
 
   @media (max-width: 768px) {
     display: none;
@@ -49,6 +51,7 @@ import { IconBrowser, IconWindows } from '../assets/icons'
   background: var(--color-theme-gradient-y);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: inherit;
 }
 
 .platforms {

@@ -14,6 +14,10 @@
   width: clamp(300px, 100vw, 1280px);
 }
 
+h1.section-title {
+  font-weight: bold;
+}
+
 .section-title {
   font-family: 'Lexend Mega';
   font-size: 4rem;
