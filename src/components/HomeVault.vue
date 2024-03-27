@@ -91,6 +91,7 @@ const redirectToPlatform = (platform) => {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   backface-visibility: none;
+  transition: scale 200ms;
 }
 
 .platform-btn::before {
@@ -108,7 +109,8 @@ const redirectToPlatform = (platform) => {
       transparent 100%
     )
     color-mix(in srgb, var(--black-1) 50%, transparent);
-  opacity: 0.4;
+  opacity: 0.8;
+  scale: 1.1;
   transition: 200ms opacity;
 }
 
@@ -118,6 +120,10 @@ const redirectToPlatform = (platform) => {
 
 .platform-btn.browser {
   --color: var(--red);
+}
+
+.platform-btn:hover {
+  scale: 1.05;
 }
 
 .platform-btn:hover::before {
