@@ -33,12 +33,20 @@ function toggleFilter(e) {
         type="checkbox"
         data-field="platform"
         @change="toggleFilter"
+        :checked="filters.some((filter) => filter.value.includes(platform))"
       />
       <label :for="platform">{{ platform }}</label>
     </div>
     <h2>Genres</h2>
     <div v-for="genre of genres" :key="genre">
-      <input :id="genre" :value="genre" type="checkbox" data-field="genre" @change="toggleFilter" />
+      <input
+        :id="genre"
+        :value="genre"
+        type="checkbox"
+        data-field="genre"
+        @change="toggleFilter"
+        :checked="filters.some((filter) => filter.value === genre)"
+      />
       <label :for="genre">{{ genre }}</label>
     </div>
   </section>

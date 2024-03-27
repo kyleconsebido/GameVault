@@ -1,5 +1,17 @@
 <script setup>
+import { useRouter } from 'vue-router'
 import { IconBrowser, IconWindows } from '../assets/icons'
+import useGames from '@/stores/useGames'
+
+const router = useRouter()
+
+const { filters } = useGames()
+
+const redirectToPlatform = (platform) => {
+  filters.value = [{ field: 'platform', value: platform }]
+  router.push('/games')
+  window.scrollTo(0, 0)
+}
 </script>
 
 <template>
@@ -12,10 +24,10 @@ import { IconBrowser, IconWindows } from '../assets/icons'
           <br />Games
         </h1>
         <div class="platforms">
-          <button class="platform-btn windows">
+          <button class="platform-btn windows" @click="redirectToPlatform('PC (Windows)')">
             <IconWindows class="platform-icon" />
           </button>
-          <button class="platform-btn browser">
+          <button class="platform-btn browser" @click="redirectToPlatform('Web Browser')">
             <IconBrowser class="platform-icon" />
           </button>
         </div>
