@@ -23,8 +23,8 @@ const clickBack = () => {
 <template>
   <main>
     <button @click="clickBack">Back</button>
-    <div v-if="loading">Loading</div>
-    <div v-else-if="error">{{ error }}</div>
+    <div v-if="state.loading">Loading</div>
+    <div v-else-if="state.error">{{ state.error }}</div>
     <div v-else>
       <div><img :src="state?.data?.thumbnail" /></div>
       <div>
