@@ -7,6 +7,8 @@ const element = ref(null)
 
 const isVisibleLinks = useNavBar()
 
+isVisibleLinks.value = false
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     isVisibleLinks.value = !entry.isIntersecting

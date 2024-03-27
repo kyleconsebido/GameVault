@@ -122,10 +122,13 @@ section {
 .featured img {
   user-select: none;
   width: 100%;
+  max-height: 80vh;
+  object-fit: cover;
 
   @media (max-width: 768px) {
-    min-height: 500px;
-    width: auto;
+    max-height: auto;
+    min-height: 600px;
+    width: 100%;
   }
 }
 
