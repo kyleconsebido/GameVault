@@ -83,7 +83,9 @@ const initializeGames = () => {
   position: relative;
   z-index: 1;
   width: clamp(300px, 80%, 600px);
-  animation: fade-slide 1s;
+  animation:
+    wait 200ms,
+    fade-slide 1s 200ms;
 }
 
 .section-title {
@@ -136,6 +138,16 @@ const initializeGames = () => {
   syntax: '<color>';
   inherits: false;
   initial-value: red;
+}
+
+@keyframes wait {
+  from {
+    visibility: hidden;
+  }
+
+  to {
+    visibility: hidden;
+  }
 }
 
 @keyframes fade-slide {

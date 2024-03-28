@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import useGames from '@/stores/useGames/'
+import useGames from '@/stores/useGames'
 import GameCard from '@/components/GameCard.vue'
 import GamePagination from '@/components/GamePagination.vue'
 import GameFilters from '@/components/GameFilters.vue'
