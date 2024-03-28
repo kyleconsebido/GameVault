@@ -1,1 +1,0 @@
-import{C as s,R as o,D as r}from"./index-BnzUKq_2.js";const c="https://free-to-play-games-database.p.rapidapi.com/api/game?id=",n={headers:{"X-RapidAPI-Key":o,"X-RapidAPI-Host":r},cache:"force-cache"},p=t=>{const e=s({data:null,loading:!0,error:!1});return fetch(c+t,n).then(a=>a.json()).then(a=>e.data=a).catch(a=>e.error=a).finally(()=>e.loading=!1),e};export{p as u};
