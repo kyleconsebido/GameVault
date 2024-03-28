@@ -1,0 +1,37 @@
+name: Deploy to GitHub Pages
+
+on:
+ push:
+    branches:
+      - master
+    paths-ignore:
+      - '.*/**'
+      - 'README.md'
+      - 'LICENSE'
+
+jobs:
+ build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - run: npm install
+      
+      - run: npm run build
+
+      - name: Vue-router workaround
+        run: |
+          cd dist
+          cp index.html 404.html
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
