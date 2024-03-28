@@ -2,6 +2,8 @@
 import useGames from '@/stores/useGames/'
 import DropdownButton from './DropdownButton.vue'
 
+const emit = defineEmits(['change'])
+
 const { filters, platforms, genres } = useGames()
 
 function toggleFilter(e) {
@@ -22,6 +24,7 @@ function toggleFilter(e) {
   }
 
   filters.value = updatedFilters
+  emit('change')
 }
 </script>
 <template>

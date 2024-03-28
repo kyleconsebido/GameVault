@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
 import useGames from '../stores/useGames'
+import scrollTop from '@/utils/scrollTop'
 
 const element = ref(null)
 
@@ -26,7 +27,7 @@ onUnmounted(() => {
 
 const initializeGames = () => {
   useGames().initialize()
-  window.scrollTo(0, 0)
+  scrollTop()
 }
 </script>
 <template>
@@ -82,6 +83,7 @@ const initializeGames = () => {
   position: relative;
   z-index: 1;
   width: clamp(300px, 80%, 600px);
+  animation: fade-slide 1s;
 }
 
 .section-title {
@@ -114,6 +116,8 @@ const initializeGames = () => {
     --angle 500ms,
     --end-color 1s,
     scale 200ms;
+
+  animation: 2s shine;
 }
 
 .hero-action:hover {
@@ -132,5 +136,39 @@ const initializeGames = () => {
   syntax: '<color>';
   inherits: false;
   initial-value: red;
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    translate: -1em 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes shine {
+  0% {
+    scale: 1;
+    --angle: 0.25turn;
+    --end-color: var(--red);
+  }
+
+  25% {
+    --angle: 0.5turn;
+  }
+
+  50% {
+    scale: 1.02;
+    --angle: 0.5turn;
+    --end-color: var(--yellow);
+  }
+
+  100% {
+    --angle: 0.25turn;
+  }
 }
 </style>

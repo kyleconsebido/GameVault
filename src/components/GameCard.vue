@@ -1,12 +1,13 @@
 <script setup>
 import { IconBrowser, IconWindows } from '@/assets/icons'
+import scrollTop from '@/utils/scrollTop'
 
 const { game } = defineProps(['game'])
 </script>
 
 <template>
   <div class="card">
-    <RouterLink :to="`/games/${game?.id}`" class="link">
+    <RouterLink :to="`/games/${game?.id}`" class="link" @click="scrollTop">
       <img :src="game?.thumbnail" class="thumbnail" />
       <h1 class="title">{{ game?.title }}</h1>
     </RouterLink>
@@ -36,7 +37,7 @@ const { game } = defineProps(['game'])
 }
 
 .link:hover .thumbnail {
-  scale: 0.98;
+  scale: 1.02;
 }
 
 .thumbnail {

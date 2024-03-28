@@ -1,49 +1,41 @@
 <script setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import GameSearch from './GameSearch.vue'
+import { useRoute, useRouter } from 'vue-router'
 import useGames from '../stores/useGames'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
-import router from '@/router'
-
-const hideDuration = ref('500ms')
+import scrollTop from '../utils/scrollTop'
+import GameSearch from './GameSearch.vue'
 
 const route = useRoute()
 
 const isVisibleLinks = useIsVisibleLinks()
 
-router.beforeEach(() => {
-  hideDuration.value = '0ms'
-})
-
-router.afterEach((to) => {
-  if (to.name === 'Home') {
-    setTimeout(() => (hideDuration.value = '500ms'), 0)
-  }
-})
-
-const scrollTop = (path) => {
-  const scrollOptions = { top: 0, behavior: 'instant' }
-
+const scrollTopPath = (path) => {
   if (route.path === path) {
-    scrollOptions.behavior = 'smooth'
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } else {
+    scrollTop()
   }
-
-  window.scrollTo(scrollOptions)
 }
-
 const initializeGames = () => {
   useGames().initialize()
-  scrollTop('/games')
+  scrollTopPath('/games')
 }
+
+const removeGuard = useRouter().beforeEach((to) => {
+  if (to.name !== 'Home') {
+    isVisibleLinks.value = true
+  }
+
+  removeGuard()
+})
 </script>
 
 <template>
-  <nav :class="{ hide: !isVisibleLinks }" :style="{ '--hide-ms': hideDuration }">
+  <nav :class="{ hide: !isVisibleLinks }">
     <div class="app-container">
       <ul class="nav-items">
         <li class="nav-item">
-          <RouterLink to="/" class="home" @click="scrollTop('/')">
+          <RouterLink to="/" class="home" @click="scrollTopPath('/')">
             <img class="logo" src="../assets/logo.svg" />
             <span class="title">GAME VAULT</span>
           </RouterLink>
@@ -111,9 +103,7 @@ a {
 .nav-item a {
   letter-spacing: 0.1em;
   color: var(--color-text-dark);
-  transition:
-    100ms color,
-    200ms opacity;
+  transition: 200ms color;
 }
 
 .nav-item a:hover {

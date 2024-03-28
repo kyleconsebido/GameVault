@@ -5,25 +5,16 @@ import { IconArrow } from '../assets/icons'
 const { label } = defineProps(['label'])
 
 const open = ref(false)
-const isClosing = ref(false)
 
-const uuid = crypto.randomUUID() + new Date().valueOf()
-
-let timeout
+const id = crypto.getRandomValues(new Uint8Array(6)).join('') + new Date().valueOf()
 
 const closeDropdown = () => {
-  document.removeEventListener('pointerdown', handleDocumentClick)
-  isClosing.value = true
+  open.value = false
 
-  timeout = setTimeout(() => {
-    open.value = false
-    isClosing.value = false
-  }, 200) // transition-duration
+  document.removeEventListener('pointerdown', handleDocumentClick)
 }
 
 const openDropdown = () => {
-  clearTimeout(timeout)
-  isClosing.value = false
   open.value = true
 
   document.addEventListener('pointerdown', handleDocumentClick)
@@ -38,7 +29,7 @@ const toggleOpen = () => {
 }
 
 function handleDocumentClick(e) {
-  if (!e.target.closest(`#${CSS.escape(uuid)}`)) {
+  if (!e.target.closest(`#${CSS.escape(id)}`)) {
     closeDropdown()
   }
 }
@@ -48,19 +39,16 @@ onUnmounted(() => {
 })
 </script>
 <template>
-  <div class="dropdown">
-    <button
-      v-bind="$attrs"
-      @click="toggleOpen"
-      :class="{ open: open && !isClosing }"
-      class="dropdown-btn"
-    >
+  <div :id="id" class="dropdown">
+    <button v-bind="$attrs" @click="toggleOpen" :class="{ open: open }" class="dropdown-btn">
       <span class="label">{{ label }}</span>
       <IconArrow class="icon" />
     </button>
-    <div v-if="open" :id="uuid" :class="{ closing: isClosing }" class="items scrollbar">
-      <slot name="items"></slot>
-    </div>
+    <Transition name="open-items">
+      <div v-if="open" class="items scrollbar">
+        <slot name="items"></slot>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -127,15 +115,9 @@ onUnmounted(() => {
   border: 1px solid var(--color-border-dark);
   border-radius: var(--border-radius);
   transform-origin: top left;
-  animation: open-items 200ms;
   transition:
     scale 200ms,
     opacity 200ms;
-}
-
-.items.closing {
-  scale: 0.9;
-  opacity: 0;
 }
 
 .items > :slotted(*) {
@@ -146,6 +128,14 @@ onUnmounted(() => {
 
 .items > :slotted(*):hover {
   background-color: color-mix(in srgb, var(--color-background) 95%, transparent);
+}
+
+.open-items-enter-active {
+  animation: open-items 200ms;
+}
+
+.open-items-leave-active {
+  animation: open-items 200ms reverse;
 }
 
 @keyframes open-items {
