@@ -1,11 +1,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import useNavBar from '../stores/useNavBar'
+import useIsVisibleLinks from '../stores/useIsVisibleLinks'
 import useGames from '../stores/useGames'
 
 const element = ref(null)
 
-const isVisibleLinks = useNavBar()
+const isVisibleLinks = useIsVisibleLinks()
 
 isVisibleLinks.value = false
 

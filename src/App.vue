@@ -1,5 +1,5 @@
 <script setup>
-import NavBar from './components/NavBar.vue'
+import AppNavbar from './components/AppNavbar.vue'
 import AppFooter from './components/AppFooter.vue'
 import useGames from './stores/useGames'
 
@@ -7,7 +7,7 @@ useGames().initialize()
 </script>
 
 <template>
-  <NavBar />
+  <AppNavbar />
   <RouterView />
   <AppFooter />
 </template>

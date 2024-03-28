@@ -3,14 +3,14 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import GameSearch from './GameSearch.vue'
 import useGames from '../stores/useGames'
-import useNavBar from '../stores/useNavBar'
+import useIsVisibleLinks from '../stores/useIsVisibleLinks'
 import router from '@/router'
 
 const hideDuration = ref('500ms')
 
 const route = useRoute()
 
-const isVisibleLinks = useNavBar()
+const isVisibleLinks = useIsVisibleLinks()
 
 router.beforeEach(() => {
   hideDuration.value = '0ms'
