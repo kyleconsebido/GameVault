@@ -1,40 +1,15 @@
 <script setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
 import GameSearch from './GameSearch.vue'
 import useGames from '../stores/useGames'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
-import router from '@/router'
-
-const hideDuration = ref('500ms')
-
-const route = useRoute()
 
 const isVisibleLinks = useIsVisibleLinks()
 
-router.beforeEach(() => {
-  hideDuration.value = '0ms'
-})
-
-router.afterEach((to) => {
-  if (to.name === 'Home') {
-    setTimeout(() => (hideDuration.value = '500ms'), 0)
-  }
-})
-
-const scrollTop = (path) => {
-  const scrollOptions = { top: 0, behavior: 'instant' }
-
-  if (route.path === path) {
-    scrollOptions.behavior = 'smooth'
-  }
-
-  window.scrollTo(scrollOptions)
-}
+const scrollTop = () => window.scrollTo(0, 0)
 
 const initializeGames = () => {
   useGames().initialize()
-  scrollTop('/games')
+  scrollTop()
 }
 </script>
 
@@ -43,7 +18,7 @@ const initializeGames = () => {
     <div class="app-container">
       <ul class="nav-items">
         <li class="nav-item">
-          <RouterLink to="/" class="home" @click="scrollTop('/')">
+          <RouterLink to="/" class="home" @click="scrollTop">
             <img class="logo" src="../assets/logo.svg" />
             <span class="title">GAME VAULT</span>
           </RouterLink>

@@ -2,11 +2,13 @@
 import { IconBrowser, IconWindows } from '@/assets/icons'
 
 const { game } = defineProps(['game'])
+
+const scrollTop = () => window.scrollTo(0, 0)
 </script>
 
 <template>
   <div class="card">
-    <RouterLink :to="`/games/${game?.id}`" class="link">
+    <RouterLink :to="`/games/${game?.id}`" class="link" @click="scrollTop">
       <img :src="game?.thumbnail" class="thumbnail" />
       <h1 class="title">{{ game?.title }}</h1>
     </RouterLink>
