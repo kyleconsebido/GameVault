@@ -2,10 +2,9 @@
 import GameSearch from './GameSearch.vue'
 import useGames from '../stores/useGames'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
+import scrollTop from '../utils/scrollTop'
 
 const isVisibleLinks = useIsVisibleLinks()
-
-const scrollTop = () => window.scrollTo(0, 0)
 
 const initializeGames = () => {
   useGames().initialize()

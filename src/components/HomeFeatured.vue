@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { IconBrowser, IconWindows } from '@/assets/icons'
 import useGames from '@/stores/useGames'
 import useGame from '@/stores/useGame'
+import scrollTop from '@/utils/scrollTop'
 
 const fileExtensions = {
   jpg: 'jpg',
@@ -60,6 +61,7 @@ const handleError = (e) => {
       :to="`/games/${featured?.data?.id}`"
       class="featured"
       :class="{ empty: isImageEmpty || !featured?.data || featured?.loading }"
+      @click="scrollTop"
     >
       <img
         v-if="!isImageError"

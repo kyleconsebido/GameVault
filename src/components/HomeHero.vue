@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
 import useGames from '../stores/useGames'
+import scrollTop from '@/utils/scrollTop'
 
 const element = ref(null)
 
@@ -26,7 +27,7 @@ onUnmounted(() => {
 
 const initializeGames = () => {
   useGames().initialize()
-  window.scrollTo(0, 0)
+  scrollTop()
 }
 </script>
 <template>

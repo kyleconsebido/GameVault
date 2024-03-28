@@ -3,6 +3,7 @@ import { watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { IconSearch } from '@/assets/icons'
 import useGames from '@/stores/useGames/'
+import scrollTop from '@/utils/scrollTop'
 
 const route = useRoute()
 const router = useRouter()
@@ -12,7 +13,7 @@ const { search } = useGames()
 const searchGame = () => {
   if (route.path !== '/games' && search.value) {
     router.push('/games')
-    window.scrollTo(0, 0)
+    scrollTop()
   }
 }
 

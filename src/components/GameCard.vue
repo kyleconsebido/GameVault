@@ -1,9 +1,8 @@
 <script setup>
 import { IconBrowser, IconWindows } from '@/assets/icons'
+import scrollTop from '@/utils/scrollTop'
 
 const { game } = defineProps(['game'])
-
-const scrollTop = () => window.scrollTo(0, 0)
 </script>
 
 <template>

@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router'
 import { IconBrowser, IconWindows } from '../assets/icons'
 import useGames from '@/stores/useGames'
+import scrollTop from '@/utils/scrollTop'
 
 const router = useRouter()
 
@@ -10,7 +11,7 @@ const { filters } = useGames()
 const redirectToPlatform = (platform) => {
   filters.value = [{ field: 'platform', value: platform }]
   router.push('/games')
-  window.scrollTo(0, 0)
+  scrollTop()
 }
 </script>
 
