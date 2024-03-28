@@ -1,15 +1,24 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import useGames from '../stores/useGames'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
 import scrollTop from '../utils/scrollTop'
 import GameSearch from './GameSearch.vue'
 
+const route = useRoute()
+
 const isVisibleLinks = useIsVisibleLinks()
 
+const scrollTopPath = (path) => {
+  if (route.path === path) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } else {
+    scrollTop()
+  }
+}
 const initializeGames = () => {
   useGames().initialize()
-  scrollTop()
+  scrollTopPath('/games')
 }
 
 const removeGuard = useRouter().beforeEach((to) => {
@@ -26,7 +35,7 @@ const removeGuard = useRouter().beforeEach((to) => {
     <div class="app-container">
       <ul class="nav-items">
         <li class="nav-item">
-          <RouterLink to="/" class="home" @click="scrollTop">
+          <RouterLink to="/" class="home" @click="scrollTopPath('/')">
             <img class="logo" src="../assets/logo.svg" />
             <span class="title">GAME VAULT</span>
           </RouterLink>
@@ -94,9 +103,7 @@ a {
 .nav-item a {
   letter-spacing: 0.1em;
   color: var(--color-text-dark);
-  transition:
-    100ms color,
-    200ms opacity;
+  transition: 200ms color;
 }
 
 .nav-item a:hover {
