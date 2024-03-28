@@ -1,8 +1,9 @@
 <script setup>
-import GameSearch from './GameSearch.vue'
+import { useRouter } from 'vue-router'
 import useGames from '../stores/useGames'
 import useIsVisibleLinks from '../stores/useIsVisibleLinks'
 import scrollTop from '../utils/scrollTop'
+import GameSearch from './GameSearch.vue'
 
 const isVisibleLinks = useIsVisibleLinks()
 
@@ -10,10 +11,18 @@ const initializeGames = () => {
   useGames().initialize()
   scrollTop()
 }
+
+const removeGuard = useRouter().beforeEach((to) => {
+  if (to.name !== 'Home') {
+    isVisibleLinks.value = true
+  }
+
+  removeGuard()
+})
 </script>
 
 <template>
-  <nav :class="{ hide: !isVisibleLinks }" :style="{ '--hide-ms': hideDuration }">
+  <nav :class="{ hide: !isVisibleLinks }">
     <div class="app-container">
       <ul class="nav-items">
         <li class="nav-item">
