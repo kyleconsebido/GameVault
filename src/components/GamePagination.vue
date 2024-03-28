@@ -38,12 +38,16 @@ const emitClick = (direction, callback) => {
     <button
       :disabled="currentPage == 1"
       @click="emitClick('prev', () => (currentPage = 1))"
-      class="first"
+      class="page-btn first"
     >
       <IconArrowDouble class="icon" />
     </button>
     <span class="page-slice">
-      <button :disabled="currentPage <= 1" @click="emitClick('prev', decrementPage)" class="first">
+      <button
+        :disabled="currentPage <= 1"
+        @click="emitClick('prev', decrementPage)"
+        class="page-btn first"
+      >
         <IconArrow class="icon" />
       </button>
       <button
@@ -52,13 +56,14 @@ const emitClick = (direction, callback) => {
         :disabled="currentPage === page"
         :class="{ active: currentPage === page }"
         @click="emitClick(page < currentPage ? 'prev' : 'next', () => (currentPage = page))"
+        class="page-btn"
       >
         {{ page }}
       </button>
       <button
         :disabled="currentPage >= pages"
         @click="emitClick('next', incrementPage)"
-        class="last"
+        class="page-btn last"
       >
         <IconArrow class="icon" />
       </button>
@@ -66,7 +71,7 @@ const emitClick = (direction, callback) => {
     <button
       :disabled="currentPage === pages"
       @click="emitClick('next', () => (currentPage = pages))"
-      class="last"
+      class="page-btn last"
     >
       <IconArrowDouble class="icon" />
     </button>
@@ -74,11 +79,12 @@ const emitClick = (direction, callback) => {
 </template>
 
 <style scoped>
-button {
-  font-family: 'DM Sans';
+.page-btn {
+  position: relative;
+  font-family: 'DM Sans', Inter, Roboto, sans-serif;
   font-size: 1rem;
   width: 2.5em;
-  height: 2.45em;
+  height: 2.5em;
   padding: 0.5em 1em;
   background-color: transparent;
   color: var(--color-text-light);
@@ -99,49 +105,50 @@ button {
   }
 }
 
-button:enabled {
+.page-btn:enabled {
   cursor: pointer;
 }
 
-button:enabled:hover {
+.page-btn:enabled:hover {
   background-color: var(--black-1);
   outline-color: var(--color-text-dark);
 }
 
-button:disabled {
+.page-btn:disabled {
   color: var(--black-3);
 }
 
 .pages {
   height: fit-content;
-  overflow: hidden;
 }
 
-.pages > .first,
-.pages > .last {
-  border: 1px solid var(--color-border-light);
+.pages > .page-btn {
+  outline: 1px solid var(--color-border-light);
+  outline-offset: 0.5px;
   border-radius: var(--border-radius);
-  outline-offset: -1px;
 }
 
 .icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
   fill: transparent;
-
   transition:
     200ms translate,
     200ms fill 200ms,
     200ms color;
 }
 
-button:enabled .icon {
-  color: var(--color-border-light);
-}
-
-button:enabled:hover .icon {
+.page-btn:enabled .icon {
   color: var(--color-text-light);
 }
 
-button:enabled:active .icon {
+.page-btn:enabled:hover .icon {
+  color: var(--color-text-light);
+}
+
+.page-btn:enabled:active .icon {
   transition:
     200ms translate,
     200ms fill 0s,
@@ -149,25 +156,20 @@ button:enabled:active .icon {
   fill: var(--color-text-light);
 }
 
-.pages > .first .icon,
-.pages > .last .icon {
-  scale: 2.5;
-}
-
 .first .icon {
   rotate: -0.25turn;
 }
 
 .first:enabled:hover .icon {
-  translate: -2px 0;
+  translate: calc(-50% - 2px) -50%;
 }
 
 .last .icon {
   rotate: 0.25turn;
 }
 
-.last:enabled:hover .icon {
-  translate: 2px 0;
+.last:enabled:hover svg.icon {
+  translate: calc(-50% + 2px) -50%;
 }
 
 .page-slice {
@@ -178,7 +180,7 @@ button:enabled:active .icon {
   display: inline-flex;
 }
 
-.page-slice > button:not(:last-child) {
+.page-slice > .page-btn:not(:last-child) {
   border-right: 1px solid var(--color-border-light);
 }
 
@@ -192,11 +194,7 @@ button:enabled:active .icon {
   border-bottom-left-radius: var(--border-radius);
 }
 
-.page-slice .icon {
-  scale: 2 1.5;
-}
-
 .page-slice .active {
-  color: var(--color-text-dark);
+  color: var(--color-border-light);
 }
 </style>
