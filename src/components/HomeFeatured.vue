@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { IconBrowser, IconWindows } from '@/assets/icons'
+import useIsIntersecting from '@/composables/useIsIntersecting'
 import useGames from '@/stores/useGames'
 import useGame from '@/stores/useGame'
 import scrollTop from '@/utils/scrollTop'
@@ -17,6 +18,10 @@ const { state } = useGames()
 
 const isImageEmpty = ref(true)
 const isImageError = ref(false)
+
+const element = ref(null)
+
+const isIntersecting = useIsIntersecting(element, { threshold: 0.5 })
 
 const featured = computed(() => {
   const date = new Date()
@@ -56,7 +61,7 @@ const handleError = (e) => {
 </script>
 
 <template>
-  <section class="app-container">
+  <section :ref="(el) => (element = el)" :class="{ hide: !isIntersecting }" class="app-container">
     <RouterLink
       :to="`/games/${featured?.data?.id}`"
       class="featured"
@@ -98,6 +103,12 @@ section {
   }
 }
 
+.hide .featured {
+  opacity: 0;
+  translate: 0 1em;
+  scale: 0.95;
+}
+
 .featured {
   position: relative;
   border: 1px solid var(--color-border-light);
@@ -106,6 +117,12 @@ section {
   overflow: hidden;
   display: grid;
   text-decoration: none;
+
+  transform-origin: center;
+  transition:
+    500ms opacity 200ms,
+    500ms scale 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    500ms translate 200ms;
 
   @media (max-width: 480px) {
     border-radius: 0;
@@ -172,7 +189,7 @@ section {
 
 .featured:hover .content::before {
   backdrop-filter: none;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .content > * {

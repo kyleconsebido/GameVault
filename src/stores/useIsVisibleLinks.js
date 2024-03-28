@@ -1,5 +1,5 @@
 import { ref } from 'vue'
 
-const isVisibleLinks = ref(true)
+const isVisibleLinks = ref(false)
 
 export default () => isVisibleLinks

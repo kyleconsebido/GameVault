@@ -1,8 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { IconBrowser, IconWindows } from '../assets/icons'
-import useGames from '@/stores/useGames'
-import scrollTop from '@/utils/scrollTop'
+import useIsIntersecting from '../composables/useIsIntersecting'
+import useGames from '../stores/useGames'
+import scrollTop from '../utils/scrollTop'
+
+const element = ref(null)
+
+const isIntersecting = useIsIntersecting(element, { threshold: 0.5 })
 
 const router = useRouter()
 
@@ -16,7 +22,11 @@ const redirectToPlatform = (platform) => {
 </script>
 
 <template>
-  <section class="app-container vault">
+  <section
+    :ref="(el) => (element = el)"
+    :class="{ hide: !isIntersecting }"
+    class="app-container vault"
+  >
     <img src="@/assets/images/vault-clipart.svg" />
     <div class="vault-info">
       <span>
@@ -43,14 +53,24 @@ const redirectToPlatform = (platform) => {
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: center;
+  transition: 500ms opacity;
 }
 
 .vault img {
   width: 100%;
+  opacity: 1;
+  transition:
+    500ms opacity 200ms,
+    500ms translate 200ms;
 
   @media (max-width: 768px) {
     display: none;
   }
+}
+
+.vault.hide img {
+  opacity: 0;
+  translate: 0 1em;
 }
 
 .vault-info {
@@ -58,6 +78,15 @@ const redirectToPlatform = (platform) => {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20%;
+
+  transition:
+    500ms opacity 300ms,
+    500ms translate 300ms;
+}
+
+.vault.hide .vault-info {
+  opacity: 0;
+  translate: -2em 0;
 }
 
 .vault-number {
