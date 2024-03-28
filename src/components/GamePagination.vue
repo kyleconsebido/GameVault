@@ -3,6 +3,8 @@ import { computed } from 'vue'
 import { IconArrow, IconArrowDouble } from '@/assets/icons'
 import useGames from '@/stores/useGames/'
 
+const emit = defineEmits(['prev', 'next', 'change'])
+
 const { page: currentPage, pages, incrementPage, decrementPage } = useGames()
 
 const sliceLength = 5
@@ -24,14 +26,24 @@ const pageSlice = computed(() => {
     return slice
   }
 })
+
+const emitClick = (direction, callback) => {
+  callback()
+  emit(direction)
+  emit('change')
+}
 </script>
 <template>
   <div v-if="pages > 0" class="pages">
-    <button :disabled="currentPage == 1" @click="currentPage = 1" class="first">
+    <button
+      :disabled="currentPage == 1"
+      @click="emitClick('prev', () => (currentPage = 1))"
+      class="first"
+    >
       <IconArrowDouble class="icon" />
     </button>
     <span class="page-slice">
-      <button :disabled="currentPage <= 1" @click="decrementPage" class="first">
+      <button :disabled="currentPage <= 1" @click="emitClick('prev', decrementPage)" class="first">
         <IconArrow class="icon" />
       </button>
       <button
@@ -39,15 +51,23 @@ const pageSlice = computed(() => {
         :key="page"
         :disabled="currentPage === page"
         :class="{ active: currentPage === page }"
-        @click="currentPage = page"
+        @click="emitClick(page < currentPage ? 'prev' : 'next', () => (currentPage = page))"
       >
         {{ page }}
       </button>
-      <button :disabled="currentPage >= pages" @click="incrementPage" class="last">
+      <button
+        :disabled="currentPage >= pages"
+        @click="emitClick('next', incrementPage)"
+        class="last"
+      >
         <IconArrow class="icon" />
       </button>
     </span>
-    <button :disabled="currentPage === pages" @click="currentPage = pages" class="last">
+    <button
+      :disabled="currentPage === pages"
+      @click="emitClick('next', () => (currentPage = pages))"
+      class="last"
+    >
       <IconArrowDouble class="icon" />
     </button>
   </div>
