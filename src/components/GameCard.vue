@@ -37,7 +37,7 @@ const { game } = defineProps(['game'])
 }
 
 .link:hover .thumbnail {
-  scale: 0.98;
+  scale: 1.02;
 }
 
 .thumbnail {
