@@ -21,7 +21,7 @@ const clickBack = () => {
 </script>
 
 <template>
-  <div class="app-container">
+  <main class="app-container">
     <button class="back-button" @click="clickBack">Return</button>
     <div class="grid-container">
       <div v-if="loading">Loading</div>
@@ -81,7 +81,7 @@ const clickBack = () => {
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped>
