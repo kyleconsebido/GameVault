@@ -187,8 +187,7 @@ const clickBack = () => {
   font-weight: 500;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 1024px), (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
   }
@@ -197,24 +196,19 @@ const clickBack = () => {
     grid-template-columns: 1fr;
   }
 
+  .game-cover,
+  .game-screenshot {
+    display: grid;
+    height: auto;
+    width: 100%;
+  }
+
   .info-container h1 {
     font-size: 1.5rem;
   }
 
-  .system-requirements {
-    max-width: 80%;
-  }
   .description {
     font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .info-container h1 {
-    font-size: 1.25rem;
-  }
-  .description {
-    font-size: 0.875rem;
   }
 }
 </style>
