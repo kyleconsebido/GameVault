@@ -23,27 +23,19 @@ const clickBack = () => {
 <template>
   <main class="app-container">
     <button class="back-button" @click="clickBack">Return</button>
-    <div class="grid-container">
-      <div v-if="loading">Loading</div>
-      <div v-else-if="error">{{ state.error }}</div>
-      <div v-else>
-        <div class="image-grid">
-          <img
-            alt="Game Cover"
-            class="game-cover"
-            :src="data?.thumbnail"
-            height="225"
-            width="400"
-          />
-          <img
-            v-for="screenshot of data?.screenshots"
-            :key="screenshot.id"
-            class="game-screenshot"
-            :src="screenshot.image"
-            height="225"
-            width="400"
-          />
-        </div>
+    <div v-if="loading">Loading</div>
+    <div v-else-if="error">{{ state.error }}</div>
+    <div v-else class="grid-container">
+      <div class="image-grid">
+        <img alt="Game Cover" class="game-cover" :src="data?.thumbnail" height="225" width="400" />
+        <img
+          v-for="screenshot of data?.screenshots"
+          :key="screenshot.id"
+          class="game-screenshot"
+          :src="screenshot.image"
+          height="225"
+          width="400"
+        />
       </div>
       <div class="info-container">
         <img alt="Game Cover" class="game-cover" :src="data?.thumbnail" height="150" width="300" />
