@@ -5,7 +5,7 @@ import useGame from '../stores/useGame'
 const route = useRoute()
 const router = useRouter()
 
-const state = useGame(route.params.id)
+const { data, loading, error } = useGame(route.params.id)
 
 const clickBack = () => {
   const isValidRoute = router.options.routes.some(
@@ -25,19 +25,19 @@ const clickBack = () => {
     <div class="content-container">
       <button class="back-button" @click="clickBack">Return</button>
       <div class="grid-container">
-        <div v-if="state.loading">Loading</div>
-        <div v-else-if="state.error">{{ state.error }}</div>
+        <div v-if="loading">Loading</div>
+        <div v-else-if="error">{{ state.error }}</div>
         <div v-else>
           <div class="image-grid">
             <img
               alt="Game Cover"
               class="game-cover"
-              :src="state?.data?.thumbnail"
+              :src="data?.thumbnail"
               height="225"
               width="400"
             />
             <img
-              v-for="screenshot of state?.data?.screenshots"
+              v-for="screenshot of data?.screenshots"
               :key="screenshot.id"
               class="game-screenshot"
               :src="screenshot.image"
@@ -50,24 +50,24 @@ const clickBack = () => {
           <img
             alt="Game Cover"
             class="game-cover"
-            :src="state?.data?.thumbnail"
+            :src="data?.thumbnail"
             height="150"
             width="300"
           />
-          <h1>{{ state.data.title }}</h1>
-          <p>{{ state.data.short_description }}</p>
+          <h1>{{ data?.title }}</h1>
+          <p>{{ data?.short_description }}</p>
           <div class="details">
-            <p>Genre: {{ state.data.genre }}</p>
-            <p>Platform: {{ state.data.platform }}</p>
-            <p>Publisher: {{ state.data.publisher }}</p>
-            <p>Developer: {{ state.data.developer }}</p>
-            <p>Release Date: {{ state.data.release_date }}</p>
+            <p>Genre: {{ data?.genre }}</p>
+            <p>Platform: {{ data?.platform }}</p>
+            <p>Publisher: {{ data?.publisher }}</p>
+            <p>Developer: {{ data?.developer }}</p>
+            <p>Release Date: {{ data?.release_date }}</p>
           </div>
-          <a :href="state.data.game_url" target="_blank" class="download-link">Download Now</a>
+          <a :href="data?.game_url" target="_blank" class="download-link">Download Now</a>
         </div>
         <div class="description">
           <!-- <p>Game Description:</p> -->
-          <p>{{ state?.data?.description }}</p>
+          <p>{{ data?.description }}</p>
         </div>
         <div class="system-requirements">
           <h2>System Requirements</h2>
@@ -75,18 +75,14 @@ const clickBack = () => {
             <div class="requirement-card">
               <h3>Minimum</h3>
               <ul>
-                <li><span>OS:</span> {{ state?.data?.minimum_system_requirements?.os }}</li>
+                <li><span>OS:</span> {{ data?.minimum_system_requirements?.os }}</li>
                 <li>
                   <span>Processor:</span>
-                  {{ state?.data?.minimum_system_requirements?.processor }}
+                  {{ data?.minimum_system_requirements?.processor }}
                 </li>
-                <li><span>Memory:</span> {{ state?.data?.minimum_system_requirements?.memory }}</li>
-                <li>
-                  <span>Graphics:</span> {{ state?.data?.minimum_system_requirements?.graphics }}
-                </li>
-                <li>
-                  <span>Storage:</span> {{ state?.data?.minimum_system_requirements?.storage }}
-                </li>
+                <li><span>Memory:</span> {{ data?.minimum_system_requirements?.memory }}</li>
+                <li><span>Graphics:</span> {{ data?.minimum_system_requirements?.graphics }}</li>
+                <li><span>Storage:</span> {{ data?.minimum_system_requirements?.storage }}</li>
               </ul>
             </div>
           </div>

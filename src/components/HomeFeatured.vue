@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { IconBrowser, IconWindows } from '@/assets/icons'
 import useIsIntersecting from '@/composables/useIsIntersecting'
 import useGames from '@/stores/useGames'
@@ -30,7 +30,7 @@ const featured = computed(() => {
   const game = state.data[timestamp % state.data?.length]
 
   if (game) {
-    return useGame(game.id)
+    return reactive(useGame(game.id))
   }
 
   return null
@@ -80,8 +80,8 @@ const handleError = (e) => {
         <h1 lang="en" class="section-title">{{ featured?.data?.title }}</h1>
         <div class="tags">
           <span class="platform">
-            <IconWindows v-if="featured?.data?.platform.includes('Windows')" />
-            <IconBrowser v-if="featured?.data?.platform.includes('Web Browser')" />
+            <IconWindows v-if="featured?.data?.platform?.includes?.('Windows')" />
+            <IconBrowser v-if="featured?.data?.platform?.includes?.('Web Browser')" />
           </span>
           <span class="genre">{{ featured?.data?.genre }}</span>
         </div>
