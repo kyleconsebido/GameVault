@@ -21,70 +21,62 @@ const clickBack = () => {
 </script>
 
 <template>
-  <div class="main-container">
-    <div class="content-container">
-      <button class="back-button" @click="clickBack">Return</button>
-      <div class="grid-container">
-        <div v-if="loading">Loading</div>
-        <div v-else-if="error">{{ state.error }}</div>
-        <div v-else>
-          <div class="image-grid">
-            <img
-              alt="Game Cover"
-              class="game-cover"
-              :src="data?.thumbnail"
-              height="225"
-              width="400"
-            />
-            <img
-              v-for="screenshot of data?.screenshots"
-              :key="screenshot.id"
-              class="game-screenshot"
-              :src="screenshot.image"
-              height="225"
-              width="400"
-            />
-          </div>
-        </div>
-        <div class="info-container">
+  <div class="app-container">
+    <button class="back-button" @click="clickBack">Return</button>
+    <div class="grid-container">
+      <div v-if="loading">Loading</div>
+      <div v-else-if="error">{{ state.error }}</div>
+      <div v-else>
+        <div class="image-grid">
           <img
             alt="Game Cover"
             class="game-cover"
             :src="data?.thumbnail"
-            height="150"
-            width="300"
+            height="225"
+            width="400"
           />
-          <h1>{{ data?.title }}</h1>
-          <p>{{ data?.short_description }}</p>
-          <div class="details">
-            <p>Genre: {{ data?.genre }}</p>
-            <p>Platform: {{ data?.platform }}</p>
-            <p>Publisher: {{ data?.publisher }}</p>
-            <p>Developer: {{ data?.developer }}</p>
-            <p>Release Date: {{ data?.release_date }}</p>
-          </div>
-          <a :href="data?.game_url" target="_blank" class="download-link">Download Now</a>
+          <img
+            v-for="screenshot of data?.screenshots"
+            :key="screenshot.id"
+            class="game-screenshot"
+            :src="screenshot.image"
+            height="225"
+            width="400"
+          />
         </div>
-        <div class="description">
-          <!-- <p>Game Description:</p> -->
-          <p>{{ data?.description }}</p>
+      </div>
+      <div class="info-container">
+        <img alt="Game Cover" class="game-cover" :src="data?.thumbnail" height="150" width="300" />
+        <h1>{{ data?.title }}</h1>
+        <p>{{ data?.short_description }}</p>
+        <div class="details">
+          <p>Genre: {{ data?.genre }}</p>
+          <p>Platform: {{ data?.platform }}</p>
+          <p>Publisher: {{ data?.publisher }}</p>
+          <p>Developer: {{ data?.developer }}</p>
+          <p>Release Date: {{ data?.release_date }}</p>
         </div>
-        <div class="system-requirements">
-          <h2>System Requirements</h2>
-          <div class="requirements-grid">
-            <div class="requirement-card">
-              <h3>Minimum</h3>
-              <ul>
-                <li><span>OS:</span> {{ data?.minimum_system_requirements?.os }}</li>
-                <li>
-                  <span>Processor:</span>
-                  {{ data?.minimum_system_requirements?.processor }}
-                </li>
-                <li><span>Memory:</span> {{ data?.minimum_system_requirements?.memory }}</li>
-                <li><span>Graphics:</span> {{ data?.minimum_system_requirements?.graphics }}</li>
-                <li><span>Storage:</span> {{ data?.minimum_system_requirements?.storage }}</li>
-              </ul>
-            </div>
+        <a :href="data?.game_url" target="_blank" class="download-link">Download Now</a>
+      </div>
+      <div class="description">
+        <!-- <p>Game Description:</p> -->
+        <p>{{ data?.description }}</p>
+      </div>
+      <div class="system-requirements">
+        <h2>System Requirements</h2>
+        <div class="requirements-grid">
+          <div class="requirement-card">
+            <h3>Minimum</h3>
+            <ul>
+              <li><span>OS:</span> {{ data?.minimum_system_requirements?.os }}</li>
+              <li>
+                <span>Processor:</span>
+                {{ data?.minimum_system_requirements?.processor }}
+              </li>
+              <li><span>Memory:</span> {{ data?.minimum_system_requirements?.memory }}</li>
+              <li><span>Graphics:</span> {{ data?.minimum_system_requirements?.graphics }}</li>
+              <li><span>Storage:</span> {{ data?.minimum_system_requirements?.storage }}</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -93,23 +85,6 @@ const clickBack = () => {
 </template>
 
 <style scoped>
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 3rem;
-}
-
-.content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 96rem;
-  width: 100%;
-  padding: 1rem;
-}
 .back-button {
   padding: 10px 15px;
   background: var(--color-input);
