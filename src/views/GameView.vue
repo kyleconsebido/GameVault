@@ -158,7 +158,7 @@ const clickBack = () => {
 }
 
 .info-container p {
-  color: #4a5568;
+  color: var(--color-text-dark);
   margin-top: 0.5rem;
 }
 
@@ -167,7 +167,7 @@ const clickBack = () => {
 }
 
 .details p {
-  color: #4a5568;
+  color: var(--color-text-dark);
   margin-bottom: 0.5rem;
 }
 
@@ -183,7 +183,7 @@ const clickBack = () => {
   color: #2b6cb0;
 }
 .description {
-  color: #4a5568;
+  color: var(--color-text-dark);
   margin-top: 1rem;
   font-size: 1.125rem;
   text-align: justify;
@@ -207,7 +207,7 @@ const clickBack = () => {
   /* background-color: #faf9f6; */
   border-radius: 0.5rem;
   padding: 1rem;
-  color: #4a5568;
+  color: var(--color-text-dark);
 }
 
 .requirement-card h3 {
