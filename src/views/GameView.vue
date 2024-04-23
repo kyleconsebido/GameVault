@@ -64,20 +64,18 @@ const clickBack = () => {
       </div>
       <div class="system-requirements">
         <h2>System Requirements</h2>
-        <div class="requirements-grid">
-          <div class="requirement-card">
-            <h3>Minimum</h3>
-            <ul>
-              <li><span>OS:</span> {{ data?.minimum_system_requirements?.os }}</li>
-              <li>
-                <span>Processor:</span>
-                {{ data?.minimum_system_requirements?.processor }}
-              </li>
-              <li><span>Memory:</span> {{ data?.minimum_system_requirements?.memory }}</li>
-              <li><span>Graphics:</span> {{ data?.minimum_system_requirements?.graphics }}</li>
-              <li><span>Storage:</span> {{ data?.minimum_system_requirements?.storage }}</li>
-            </ul>
-          </div>
+        <div class="requirement-card">
+          <h3>Minimum</h3>
+          <ul>
+            <li><span>OS:</span> {{ data?.minimum_system_requirements?.os }}</li>
+            <li>
+              <span>Processor:</span>
+              {{ data?.minimum_system_requirements?.processor }}
+            </li>
+            <li><span>Memory:</span> {{ data?.minimum_system_requirements?.memory }}</li>
+            <li><span>Graphics:</span> {{ data?.minimum_system_requirements?.graphics }}</li>
+            <li><span>Storage:</span> {{ data?.minimum_system_requirements?.storage }}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -171,13 +169,6 @@ const clickBack = () => {
   margin-top: 3rem;
   max-width: 48rem;
   width: 100%;
-}
-
-.requirements-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 1.5rem;
-  margin-top: 1rem;
 }
 
 .requirement-card {
