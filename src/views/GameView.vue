@@ -112,22 +112,23 @@ const clickBack = () => {
 }
 .back-button {
   padding: 10px 15px;
-  background: #4a5568;
+  background: var(--color-input);
   border: none;
   cursor: pointer;
   margin-bottom: 1rem;
-  color: #faf9f6;
+  color: var(--color-text-dark);
   font-weight: bold;
   transition:
-    background 0.3s ease,
+    background-color 0.3s ease,
     color 0.3s ease;
   border-radius: 5px;
+
+  &:hover {
+    background-color: var(--color-border-light);
+    color: var(--color-text-light);
+  }
 }
 
-.back-button:hover {
-  background: #2d3640;
-  color: #faf9f6;
-}
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -154,7 +155,7 @@ const clickBack = () => {
 .info-container h1 {
   font-size: 2rem;
   font-weight: bold;
-  color: #faf9f6;
+  color: var(--color-heading);
 }
 
 .info-container p {
@@ -175,12 +176,13 @@ const clickBack = () => {
   display: inline-flex;
   align-items: center;
   font-weight: 500;
-  color: #4299e1;
   text-decoration: none;
+  color: var(--red);
+  transition: 200ms color;
 }
 
 .download-link:hover {
-  color: #2b6cb0;
+  color: var(--yellow);
 }
 .description {
   color: var(--color-text-dark);
