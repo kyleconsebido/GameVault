@@ -37,8 +37,8 @@ const initializeGames = () => {
       <div :ref="(el) => (element = el)" class="hero">
         <h1 class="section-title">GAME VAULT</h1>
         <div class="hero-text">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit aliquam suscipit ab sint
-          perferendis quisquam odit eligendi dolorem laboriosam!
+          Discover an extensive range of free PC and Web Browser games. Dive in, find your next
+          gaming obsession, and start playing today!
         </div>
         <RouterLink class="hero-action" to="/games" @click="initializeGames">PLAY NOW</RouterLink>
       </div>

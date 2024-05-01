@@ -127,6 +127,12 @@ const clickBack = () => {
   color: var(--color-text-dark);
   margin-top: 0.5rem;
 }
+.info-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
 
 .details {
   margin-top: 1rem;
@@ -187,7 +193,7 @@ const clickBack = () => {
   font-weight: 500;
 }
 
-@media (min-width: 600px) and (max-width: 1024px), (max-width: 768px) {
+@media (max-width: 1024px) {
   .grid-container {
     grid-template-columns: 1fr;
   }
@@ -197,7 +203,8 @@ const clickBack = () => {
   }
 
   .game-cover,
-  .game-screenshot {
+  .game-screenshot,
+  .info-container img {
     display: grid;
     height: auto;
     width: 100%;
@@ -209,6 +216,29 @@ const clickBack = () => {
 
   .description {
     font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .image-grid img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  .info-container img {
+    width: 70%;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .info-container img {
+    width: 80%;
+    height: auto;
   }
 }
 </style>
