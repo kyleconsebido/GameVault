@@ -16,8 +16,6 @@ const state = reactive({
   data: [],
   loading: false,
   error: null,
-  search: '',
-  filters: []
 })
 
 const search = ref('')
